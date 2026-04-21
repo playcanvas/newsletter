@@ -1,0 +1,4 @@
+dist/
+newsletters/.state/
+.DS_Store
+*.log

@@ -1,0 +1,67 @@
+name: Deploy media to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'media/**'
+      - '.github/workflows/pages.yml'
+  workflow_dispatch:
+
+# Allow one concurrent deployment, and cancel in-progress runs when a new one is queued.
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+jobs:
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
+
+      - name: Assemble site
+        run: |
+          mkdir -p _site
+          cp -r media _site/media
+          cat > _site/index.html <<'HTML'
+          <!DOCTYPE html>
+          <html lang="en">
+          <head>
+            <meta charset="UTF-8" />
+            <meta name="robots" content="noindex" />
+            <title>PlayCanvas Newsletter Media</title>
+            <style>
+              body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+                     background: #111; color: #eee; max-width: 640px; margin: 80px auto; padding: 0 20px; line-height: 1.6; }
+              a { color: #ef792b; }
+              code { background: #222; padding: 2px 6px; border-radius: 3px; font-size: 0.9em; }
+            </style>
+          </head>
+          <body>
+            <h1>PlayCanvas Newsletter</h1>
+            <p>This site hosts media files for the <a href="https://github.com/playcanvas/newsletter">PlayCanvas newsletter</a>.</p>
+            <p>Media lives under <code>/media/YYYY-MM/</code>.</p>
+          </body>
+          </html>
+          HTML
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+      - id: deployment
+        name: Deploy to GitHub Pages
+        uses: actions/deploy-pages@v4
