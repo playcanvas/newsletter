@@ -2,7 +2,7 @@
 
 Source markdown and media for the PlayCanvas newsletter.
 
-The CLI that builds, previews, and sends these newsletters lives in a separate repository: [playcanvas/mailchimp-cli](https://github.com/playcanvas/mailchimp-cli).
+Newsletters are built, previewed and sent with the PlayCanvas team's internal Mailchimp CLI.
 
 ## Layout
 
@@ -33,7 +33,7 @@ Then commit and push. The Actions workflow deploys Pages automatically (usually 
 
 ## Authoring
 
-After cloning the CLI:
+With the CLI installed:
 
 ```bash
 cd path/to/newsletter           # this repo
@@ -43,7 +43,9 @@ newsletter preview              # live preview at http://localhost:3000
 
 The CLI auto-detects the content directory from the current working directory. You can also set `NEWSLETTER_CONTENT_DIR` in the CLI's `.env` or pass `--content-dir`.
 
-See the CLI [README](https://github.com/playcanvas/mailchimp-cli#readme) for the full workflow (test send, push draft, send to audience).
+The CLI's own README covers the full workflow: test send, then send to the audience.
+
+Commit a newsletter here only after it has been sent. This repo is public, so anything pushed is visible straight away.
 
 ## Linting
 

@@ -2,9 +2,9 @@
 
 ## Project Overview
 
-Source markdown and media for the PlayCanvas newsletter. The CLI that operates on this content lives in [playcanvas/mailchimp-cli](https://github.com/playcanvas/mailchimp-cli).
+Source markdown and media for the PlayCanvas newsletter. The CLI that operates on this content is the team's internal `mailchimp-cli` tool, which lives in a private repository. Don't link to it from this repo.
 
-This repo is **public** so that `media/` can be served via GitHub Pages for email clients to fetch without authentication.
+This repo is **public** so that `media/` can be served via GitHub Pages for email clients to fetch without authentication. Because of that, commit a newsletter's markdown only after it has been sent.
 
 ## Directory Structure
 
